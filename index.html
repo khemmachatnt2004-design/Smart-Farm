@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Farm Dashboard</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f5f0;
+  color: #24352a;
+}
+header {
+  background: #176b45;
+  color: white;
+  padding: 24px;
+  text-align: center;
+}
+header h1 { margin: 0 0 8px; }
+header p { margin: 0; }
+.container {
+  max-width: 950px;
+  margin: 30px auto;
+  padding: 0 18px;
+}
+h2 { margin-top: 28px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+}
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 3px 12px #00000010;
+}
+.card h3 { margin-top: 0; }
+.value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #176b45;
+}
+.device {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 22px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  background: #777;
+}
+button.on { background: #16834e; }
+button.off { background: #777; }
+.status { font-size: 14px; color: #66756a; }
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #66756a;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌱 SMART FARM</h1>
+  <p>Smart Farm Monitoring & Control System</p>
+</header>
+
+<div class="container">
+  <h2>📊 Farm Dashboard</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🌡️ Temperature</h3>
+      <div class="value">28 °C</div>
+      <p class="status">Simulated temperature</p>
+    </div>
+
+    <div class="card">
+      <h3>💧 Soil Moisture</h3>
+      <div class="value">65 %</div>
+      <p class="status">Simulated soil moisture</p>
+    </div>
+  </div>
+
+  <h2>⚡ Equipment Control</h2>
+
+  <div class="grid">
+    <div class="card device">
+      <div>
+        <h3>💡 Light Control</h3>
+        <p class="status" id="lightStatus">Status: OFF</p>
+      </div>
+      <button class="off" id="lightBtn"
+        onclick="toggleDevice('light')">OFF</button>
+    </div>
+
+    <div class="card device">
+      <div>
+        <h3>🚿 Water Pump</h3>
+        <p class="status" id="pumpStatus">Status: OFF</p>
+      </div>
+      <button class="off" id="pumpBtn"
+        onclick="toggleDevice('pump')">OFF</button>
+    </div>
+
+    <div class="card device">
+      <div>
+        <h3>🌀 Fan Control</h3>
+        <p class="status" id="fanStatus">Status: OFF</p>
+      </div>
+      <button class="off" id="fanBtn"
+        onclick="toggleDevice('fan')">OFF</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Smart Farm Project | Educational Demo
+</footer>
+
+<script>
+const devices = {
+  light: false,
+  pump: false,
+  fan: false
+};
+
+function toggleDevice(name) {
+  devices[name] = !devices[name];
+
+  const button = document.getElementById(name + "Btn");
+  const status = document.getElementById(name + "Status");
+
+  button.textContent = devices[name] ? "ON" : "OFF";
+  button.className = devices[name] ? "on" : "off";
+  status.textContent = "Status: " +
+    (devices[name] ? "ON" : "OFF");
+}
+</script>
+
+</body>
+</html>
